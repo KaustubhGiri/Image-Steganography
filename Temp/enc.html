@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+
+{% block title %}Encode{% endblock %}
+
+{% block content1 %}
+	<script>
+		function sec_pin(){
+			document.getElementById("sec").innerHTML='<br><input type="hidden" name="hidden_sec" value="pined"><input type="tel"  placeholder="eg. 343685" pattern="[0-9]{3}[0-9]{3}" name="pin" min="6" max="6" ></input>';
+		}
+		function validateImage(id) {
+		    var file = document.getElementById(id).files[0];
+		 	var t = file.type.split('/').pop().toLowerCase();
+		 	if (t != "jpeg" && t != "jpg" && t != "png") {
+		        alert('Please select a valid image file');
+		        document.getElementById(id).value = '';
+		        return false;
+		    }
+		    if (file.size > 1024000) {
+		        alert('Max Upload size is 1MB only');
+		        document.getElementById(id).value = '';
+		        return false;
+		    }
+		    return true;
+		}
+</script>
+		
+	</script>
+	<div class="container">	 
+		<h2 style="color:white;">Encoder</h2>
+		<p style="color: white;">
+		To encode a message into an image,Select the type of encoding there are two types of encoding : Encode Message,Encode Image.<br>
+		While <strong>encoding image inside another image</strong> the size of hide image(image which needs to be hidden) should be <b>less</b> then the image that will cover(Cover Image) or hide it.
+		Choose the image you want to use, enter your text and hit the <strong>Encode</strong> button. <br>
+		Remember, the more text you want to hide, the larger the image has to be.<br>
+		<strong>Note : 1) Only PNG AND JPG Image formats are supported.<br> 
+		&emsp;&emsp;&emsp; 2) The maximum size of image should be <b>1MB</b>.<br> 
+		</p>
+		<div class="dropdown">
+			<button class="btn dropdown-toggle " type="button" data-toggle="dropdown" style="color:white;">Encode Type<span class="caret"></span></button>
+			<ul class="dropdown-menu" style="font-size: 18px;">
+			<li><a href="/main">Encode Message</a></li>
+			<li><a href="/Upload_imgenc">Encode Image</a></li>
+			
+			</ul>
+		</div>				
+		<!--
+						<div class="container mx-auto ">
+							<ul class="nav nav-tabs" id="tab" data-tabs="tabs">
+							<a href="/main" class="btn btn-primary btn-lg stretched-link">Encode Message</a>
+							<a href="/Upload_imgenc" class="btn btn-primary btn-lg stretched-link">Encode Image</a>
+							</ul>
+						</div>
+		-->
+
+		<br>    
+		<div  id="none">
+			<div id="type">
+				<form method = "post" enctype="multipart/form-data"> 
+					{% csrf_token %} 
+					{{ form.as_p }} 
+					<br>
+					{% if user.is_authenticated %}
+					<button type="button" class="btn btn-dark" onclick="sec_pin();"><input type="hidden" name="hidden_sec" value="pin">Secure with pin </button>
+					<br>
+					<div id="sec"></div><br>
+					{% endif %}
+					<button class="btn btn-success " type="submit">Encode</button> 
+					
+				</form> 
+			</div><br>
+		</div><br>
+	</div>
+{% endblock %}

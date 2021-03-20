@@ -1,0 +1,101 @@
+
+{% extends "base/base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block title %}Encoded Data{% endblock %}
+{% block content1 %}
+	<style type="text/css">
+		a{
+			color: white;
+
+		}
+	</style>
+	<ul class="nav nav-tabs" id="navbarcenter" role="tablist" style="border:0px;">
+		<li class="nav-item">
+		  <a class="nav-link active" data-toggle="tab" href="#encode_msg">Encoded Messages</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" data-toggle="tab" href="#encode_img"> Encoded Images</a>
+		</li>
+	</ul>
+	<div class="container"> 
+		<div class="tab-content">
+			<div id="encode_msg" class="container tab-pane active"><br>
+				<div class="table-responsive">
+					<table class="table table-dark table-hover" > 
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Message</th>
+								<th>Pin</th>
+								<th>Encoded Image</th>
+							</tr>
+						</thead>
+							<tbody>
+								{% for data in encoded_data %}
+								<tr>
+									<td>
+										{{ forloop.counter }}
+									</td>
+									<td>
+										{% extract_msg data.message %}
+									</td>
+									<td>
+										{% if data.pin == defaultpin %}
+											NO PIN
+										{% else %}
+											{{ data.pin }}
+										{% endif %}
+									</td>
+									<td>
+										<a href='{% static data.encoded_img  %}'>{% extract_imgname data.encoded_img %}</a> <a href='{% static data.encoded_img  %}' download><b>Download</b></a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="encode_img" class="container tab-pane fade"><br>
+				<div class="table-responsive">
+					<table class="table table-dark table-hover">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Pin</th>
+								<th>Main Image Name(Hidden)</th>
+								<th>Cover Image Name(Cover)</th>
+								<th>Encoded Image</th>
+							</tr>
+						</thead>
+							<tbody>
+								{% for data in encoded_data_img %}
+								<tr>
+									<td>
+										{{ forloop.counter }}
+									</td>
+									<td>
+										{% if data.pin_img == defaultpin %}
+											NO PIN
+										{% else %}
+											{{ data.pin_img }}
+										{% endif %}
+									</td>
+									<td>
+										<a href='{% static data.main_img  %}'>{% extract_imgname data.main_img %}</a> <a href='{% static data.main_img  %}' download><b>Download</b></a>
+									</td>
+									<td>
+										<a href='{% static data.cover_img  %}'>{% extract_imgname data.cover_img %}</a> <a href='{% static data.cover_img  %}' download><b>Download</b></a>
+									</td>
+									<td>
+										<a href='{% static data.enc_img_steg  %}'>{% extract_imgname data.enc_img_steg %}</a> <a href='{% static data.enc_img_steg  %}' download><b>Download</b></a>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+					</table>
+				</div> 
+			</div>
+		</div>
+	</div>
+{% endblock %}
+							

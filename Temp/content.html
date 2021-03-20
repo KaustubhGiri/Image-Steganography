@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static 'css/test.css' %}">
+	<script src="{% static 'css/vendor.js' %}" charset="utf-8"></script>
+    
+    <!--==================== CSS =====================-->
+    <link rel="stylesheet" href="{% static 'css/box.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <style type="text/css">
+    	
+		.darkContentBox1,.texter{
+			min-height: 450px;
+		}
+
+		.containered {
+		width: 1300px;
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+		}
+    	.dropdown-menu{
+			 min-width: 60px;
+		}
+		
+		.nav-tabs > li {
+			float:none;
+			display:inline-block;
+			zoom:1;
+		}
+
+		.nav-tabs {
+    	text-align:center;
+		}
+		a{
+			color: white;
+		}
+		
+
+		
+	</style>
+</head>
+
+<body style="background-color:#202124;">
+	 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script>
+			function sec_pin(){
+				document.getElementById("sec").innerHTML='<br><input type="hidden" name="hidden_sec" value="pined"><input type="tel"  placeholder="eg. 343685" pattern="[0-9]{3}[0-9]{3}" name="pin" min="6" max="6" ></input>';
+			}
+		</script>	      
+		      <header id="MainHeader" class="container-fluid" style="background-color:#202124;">
+		        		<center>	 		
+		        			<span style="color:red;text-align:center;font-style:bold;font-size:70px;font-family: Algerian;">IMAGE </span><br>
+		        			<span style="color:white;text-align:center;font-style:bold;font-size:45px;font-family: Algerian;">STEGANOGRAPHY</span>
+		        		</center>
+			  </header>
+			  
+			  <!--Navbar-->
+					<div class="container"  style="background-color:#202124";>
+						<nav class="navbar navbar-inverse">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>                        
+								</button>
+							</div>
+							<div class="collapse navbar-collapse" id="myNavbar">
+								<ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="border:0px;color: white;">
+									<li><a href="#encode" data-toggle="tab">Encode</a></li>
+									<li><a href="#decode" data-toggle="tab">Decode</a></li>
+									{% if user.is_authenticated %}
+									<li><a href="#userdata" data-toggle="tab">Encoded Data</a></li>
+									<li class="nav-item dropdown pull-right">
+										<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+											<a class="dropdown-item" href="#">My account</a>
+											<a class="dropdown-item" href="/Logout">Log out</a>
+										</div>
+									</li>
+										<!-- 
+											<li class="pull-right"> <a href="/Logout" ><h4>Logout</h4></a></li>
+										-->
+									
+									{% else %}
+										<li><a href="/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+										<li><a href="/Register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+									{% endif %}
+								</ul>
+							</div>
+						</nav>
+					</div>
+					<!--/.Navbar -->
+			  	<!--
+		      		<div class="container" id="nav-bar" style="background-color:#202124;">
+		      			<ul class="nav nav-tabs" id="tabs" data-tabs="tabs" style="border-bottom:0px">
+						<li> <a href="#encode" data-toggle="tab"><h4>Encode</h4></a></li>
+						<li> <a href="#decode" data-toggle="tab"><h4>Decode</h4></a></li>
+						{% if user.is_authenticated %}
+						<li> <a href="#userdata" data-toggle="tab"><h4>Encoded Data</h4></a></li>
+							<li class="pull-right"> <a href="http://localhost:8000/Logout" ><h4>Logout</h4></a></li>
+						{% else %}
+						<li> <a href="http://localhost:8000/Login" ><h4>Login</h4></a></li>
+						<li> <a href="http://localhost:8000/Register" ><h4>Register</h4></a></li>
+						{% endif %}
+						</ul>	
+					</div>
+
+				-->
+							<!-- 
+							{% if user.is_authenticated %}
+							<marquee style="background-color:#202124;"><h2 style="color:white">Hello {{ user.username }} Welcome To Image Steganography</h2></marquee>
+							{% endif %}
+							-->
+					
+			<div id="MainContent" class="containered">
+				<div id="homePage" style="height: 100px";>
+					<div class="Window">
+						<div class="WindowContent">
+							<div class="darkContentBox1">
+								<div id="my-tab-content" class="tab-content">
+									<!-- FOR ENCODE -->
+									<div class="tab-pane active" id="encode">
+										<h2 style="color:white;">Encoder</h2>
+												<p style="color: white;" >
+												To encode a message into an image, choose the image you want to use, enter your text and hit the <strong>Encode</strong> button. <br>
+												Save the last image, it will contain your hidden message. <br>
+												Remember, the more text you want to hide, the larger the image has to be. In case you chose an image that is to small to hold your message you will be informed.<br><br>
+												Neither the image nor the message you hide will be at any moment transmitted over the web, all the magic happens within your browser.
+												</p>
+															
+												<div class="dropdown">
+													<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Encode Type
+													<span class="caret"></span></button>
+													<ul class="dropdown-menu" style="color:white; font-size: 18px;">
+													<li><a href="http://localhost:8000/main">Encode Message</a></li>
+													<li><a href="http://localhost:8000/Upload_imgenc">Encode Image</a></li>
+													
+													</ul>
+												</div>				
+																
+												<!--
+																<div class="container mx-auto ">
+																	<ul class="nav nav-tabs" id="tab" data-tabs="tabs">
+																	<a href="http://localhost:8000/main" class="btn btn-primary btn-lg stretched-link">Encode Message</a>
+																	<a href="http://localhost:8000/Upload_imgenc" class="btn btn-primary btn-lg stretched-link">Encode Image</a>
+																	</ul>
+																</div>
+												-->
+												<br>    
+												<div  id="none">
+													<div id="type">
+														<form method = "post" enctype="multipart/form-data"> 
+															{% csrf_token %} 
+															{{ form.as_p }} 
+															<br>
+															{% if user.is_authenticated %}
+															<button type="button" class="btn btn-primary" onclick="sec_pin();"><input type="hidden" name="hidden_sec" value="pin">Secure with pin </button>
+															<br>
+															<div id="sec"></div><br>
+															{% endif %}
+															<button class="btn btn-success " type="submit">Encode</button> 
+															
+														</form> 
+													</div><br>
+												</div><br>
+									</div>
+
+									<!-- FOR DECODE -->
+									<div class="tab-pane" id="decode" >
+										<div>
+											<h2 style="color:white;">Decoder</h2>
+											<p style="color: white;">
+											To decode a hidden message from an image, just choose an image and hit the <strong>Decode</strong> button.<br><br>
+											Neither the image nor the message that has been hidden will be at any moment transmitted over the web, all the magic happens within your browser.
+											</p>
+											<!--
+											<div class="container mx-auto ">
+											<ul class="nav nav-tabs" id="tab" data-tabs="tabs">
+												<a href="http://localhost:8000/decode" class="btn btn-primary btn-lg stretched-link">Decode Message</a>
+												<a href="http://localhost:8000/Upload_imgdec" class="btn btn-primary btn-lg stretched-link">Decode Image</a>
+											</ul>
+											</div>
+											<br> -->      
+											<div>
+												<form method = "post" enctype="multipart/form-data" action="http://localhost:8000/decode"> 
+												{% csrf_token %} 
+												<input type="file" name="dec_img" class="form-control" required id="id_image_path">
+													<h3>
+														<select  name="value"><span >Decode Type : </span> 
+														<option value="1" >Decode Message</option>
+														<option value="2">Decode Image</option>
+														</select>
+													</h3>
+													<br>
+												<button class="btn btn-success" type="submit">Decode</button> 
+												</form> 
+											</div>
+										</div>
+									</div>
+													
+									<!--Encoded Data-->
+
+									<div class="tab-pane" id="userdata">
+										<!--
+										<ul class="nav nav-tabs" id="tab" data-tabs="tabs" style="border-bottom:0px">
+											<li role="presentation"> <a href="#encoded_messages" data-toggle="tab"><h5>Encoded Messages</h5></a></li>
+											<li role="presentation"> <a href="#encoded_imgs" data-toggle="tab"><h5>Encoded Images</h5></a></li>
+										</ul>
+										-->
+										<div class="container">
+										<ul class="nav nav-tabs" role="tablist">
+											<li class="nav-item">
+											  <a class="nav-link active" data-toggle="tab" href="#encode_msg">Encoded Messages</a>
+											</li>
+											<li class="nav-item">
+											  <a class="nav-link" data-toggle="tab" href="#encode_img"> Encoded Images</a>
+											</li>
+											
+										</ul>
+										<div class="tab-content">
+											<div id="encode_msg" class="container tab-pane fade"><br>
+												<table class="table table-hover text-primary" > 
+													<thead>
+														<tr>
+															<th>Sr No</th>
+															<th>Message</th>
+															<th>Pin</th>
+															<th>Encoded Image</th>
+														</tr>
+													</thead>
+														<tbody>
+															{% for data in encoded_data %}
+															<tr>
+																<td>
+																	{{ forloop.counter }}
+																</td>
+																<td>
+																	{% extract_msg data.message %}
+																</td>
+																<td>
+																	{% if data.pin == defaultpin %}
+																		NO PIN
+																	{% else %}
+																		{{ data.pin }}
+																	{% endif %}
+																</td>
+																<td>
+																	<a href='{% static data.encoded_img  %}'>{% extract_imgname data.encoded_img %}</a> <a href='{% static data.encoded_img  %}' download><b>Download</b></a></td>
+															</tr>
+															{% endfor %}
+														</tbody>
+												</table>
+											</div>
+											<div id="encode_img" class="container tab-pane fade"><br>
+												<table class="table table-hover text-primary">
+													<thead>
+														<tr>
+															<th>Sr No</th>
+															<th>Pin</th>
+															<th>Main Image Name(Hidden)</th>
+															<th>Cover Image Name(Cover)</th>
+															<th>Encoded Image</th>
+														</tr>
+													</thead>
+														<tbody>
+															{% for data in encoded_data_img %}
+															<tr>
+																<td>
+																	{{ forloop.counter }}
+																</td>
+																<td>
+																	{% if data.pin_img == defaultpin %}
+																		NO PIN
+																	{% else %}
+																		{{ data.pin_img }}
+																	{% endif %}
+																</td>
+																<td>
+																	<a href='{% static data.main_img  %}'>{% extract_imgname data.main_img %}</a> <a href='{% static data.main_img  %}' download><b>Download</b></a>
+																</td>
+																<td>
+																	<a href='{% static data.cover_img  %}'>{% extract_imgname data.cover_img %}</a> <a href='{% static data.cover_img  %}' download><b>Download</b></a>
+																</td>
+																<td>
+																	<a href='{% static data.enc_img_steg  %}'>{% extract_imgname data.enc_img_steg %}</a> <a href='{% static data.enc_img_steg  %}' download><b>Download</b></a>
+																</td>
+															</tr>
+															{% endfor %}
+														</tbody>
+												</table>											 
+											</div>
+										</div>
+									</div>
+								</div>				
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	</body>
+</html>

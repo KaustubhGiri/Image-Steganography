@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+
+{% block title %}Encode{% endblock %}
+
+{% block content1 %}
+<div class="container"> 
+<h2 style="color:white;">Decoder</h2>
+<p style="color: white;">
+To decode a hidden message or image from an <b>Image</b> , just choose an image and hit the <strong>Decode</strong> button.
+</p>
+<!--
+<div class="container mx-auto ">
+<ul class="nav nav-tabs" id="tab" data-tabs="tabs">
+<a href="http://localhost:8000/decode" class="btn btn-primary btn-lg stretched-link">Decode Message</a>
+<a href="http://localhost:8000/Upload_imgdec" class="btn btn-primary btn-lg stretched-link">Decode Image</a>
+</ul>
+</div> 
+<br> -->
+<script type="text/javascript">
+		function validateImage() {
+		    var file = document.getElementById("dec_img").files[0];
+		 	var t = file.type.split('/').pop().toLowerCase();
+		 	if (t != "jpeg" && t != "jpg" && t != "png") {
+		        alert('Please select a valid image file');
+		        document.getElementById("dec_img").value = '';
+		        return false;
+		    }
+		    if (file.size > 1024000) {
+		        alert('Max Upload size is 1MB only');
+		        document.getElementById("dec_img").value = '';
+		        return false;
+		    }
+		    return true;
+		}      
+</script>
+<div>
+	<form method = "post" enctype="multipart/form-data" action="/decode"> 
+	{% csrf_token %} 
+		<input type="file" name="dec_img" class="form-control" id="dec_img" onchange="validateImage()" required>
+		<br>
+		<h4>
+			<select  name="value"><span >Decode Type : </span> 
+			<option value="1" >Decode Message</option>
+			<option value="2">Decode Image</option>
+			</select>
+		</h4>
+		<br>
+		<button class="btn btn-success" type="submit">Decode</button> 
+	</form> 
+</div>
+</div>										
+{% endblock %}

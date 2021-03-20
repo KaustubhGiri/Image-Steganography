@@ -1,0 +1,69 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+ <head>
+
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <style>
+       .popup{
+       background:grey;
+       width: 100%;
+       height: 100%;
+       position: absolute;
+       left: 0;
+       top: 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+
+     }
+    .popup-content{
+       height: 400px;
+       width: 600px;
+       background-color: white;
+       padding:20px;
+       border-radius:5px;
+       position:relative;
+     }
+     .close{
+       position:absolute;
+       top: -16px;
+       right: -16px;
+       background: #fff;
+       height: 30px;
+       width: 30px;
+       border-radius: 50%;
+       box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+       cursor: pointer;
+     }
+   </style>
+     <link href="links.html" rel="import" />
+
+    <link rel="stylesheet" href="{% static 'css/popup1.css' %}">
+ </head>
+<body>
+    
+   <div class="container">
+     <div class="popup">
+         <div class="popup-content">
+           <h4>Decoded Message</h4>
+           <img src="{% static 'close1.png' %}"  alt="close" class="close">
+           
+           <h3> {{ msg }} {{ msg_sec }} </h3>
+         </div>
+     </div>
+   </div>
+   <script type="text/javascript">
+     document.querySelector(".close").addEventListener("click", function(){
+       document.querySelector(".popup").style.display="none";
+       window.location.href="http://localhost:8000/main"; 
+       //load("content.html");
+     })
+     
+   </script>
+</body>

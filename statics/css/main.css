@@ -1,0 +1,49 @@
+#MainHeader{
+    background-color: #333  ;
+    height: 150px;
+    
+}
+body{
+    background-color: #ccc;
+} 
+
+#tabs{
+    width: 1170px;
+    background-color:  #333  ;
+    height:50px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+#TopSpacer{
+    height:40px;
+}
+
+
+a{
+    color: #c8c8c8;
+    text-decoration: none;
+    
+}
+li {
+    list-style: none;
+}
+
+.container{
+        min-height: 100%;
+        overflow: hidden;
+    }
+
+#frame{
+    width:100%;
+    height:100%;
+}
+#enc,#dec{
+    transition: width 2s;
+}
+#encode_decode{
+	text-align: center;
+    width:60%;
+    padding: 10px 10px;
+	height:60%;	
+}

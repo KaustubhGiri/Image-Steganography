@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html>
+<head>
+	<title>
+		{% block title %}{% endblock%}
+	</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/box1.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  	<style type="text/css">
+
+  	</style>
+</head>
+<body style="background-color:#202124;">
+	{% block content %}
+	<div class="container-fluid" >
+			<img src="{% static 'logo.png' %}" class="img-fluid mx-auto d-block" alt="Image Steganography">
+	</div>
+
+	<div class="container"> 
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+			    
+			      
+			      {% if user.is_authenticated %}
+			      	<ul class="navbar-nav mx-auto">	
+			      		
+				      		<li class="nav-item">
+				      		 	<a class="nav-link" href="/main">Encode</a>
+				      		</li>
+				     		<li class="nav-item">
+				        		<a class="nav-link" href="/dec">Decode</a>
+				      		</li>
+				      		<li class="nav-item ">
+			    				<a class="nav-link" href="/encoded_data">Encoded Data</a>
+			      			</li>
+				      		
+			      		
+				   	</ul>
+			      	<tr class="mr-auto">
+			      		<td class="avatar">
+			      			<div class="dropdown">
+						      <a href="#" id="imageDropdown" data-toggle="dropdown"><img src="{% static 'avatar.png' %}" style="width:45px"></a>
+						      <ul class="dropdown-menu" style="background-color:#202124;" role="menu" aria-labelledby="imageDropdown">
+						      	<a role="menuitem" tabindex="-1" style="color:white;"href="/Logout">Log out</a>
+						        
+						      </ul>
+						    </div>
+				            
+				        </td>
+				        
+				    </tr>    
+				        
+				       
+			      	<!--
+			      		<li class="nav-item ">
+			    			<a class="nav-link" href="/encoded_data">Encoded Data</a>
+			      		</li>
+			      		<li class="nav-item pull-right">
+			        		<a class="nav-link" href="/Logout">Log out</a>
+			     		</li>
+			     	-->
+				  {% else %}
+				 <ul class="navbar-nav mx-auto" id="navbarcenter">
+			    	
+			      <li class="nav-item">
+			        <a class="nav-link" href="/main">Encode</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="/dec">Decode</a>
+			      </li>					
+			      <li class="nav-item">
+			       <a class="nav-link" href="/Login"><span class="glyphicon glyphicon-login"></span>Log in</a>
+			      </li>
+			       <li class="nav-item">
+			        <a class="nav-link" href="/Register"><span class="glyphicon glyphicon-user"></span>Register</a>
+			      </li> 
+			      {% endif %}       
+			    </ul>
+			  </div>  
+		</nav>
+		<div class="container">
+		{% if user.is_authenticated %}<br>
+		<marquee style="color: white;"><h4 style="text-transform:uppercase; ">Welcome {{ user.username }} to Image Steganography.</h4></marquee>
+		{% else %}
+		<br>
+		<marquee style="color: white;"><h4>Register to get additional Features such as viewing and downloading your Encoded data and also get an additional secured with pin feature.</h4></marquee>
+		</div>
+		{% endif %}
+	</div><br>
+	<div class="container">
+		<div class="Window">
+			<div class="WindowContent">
+				<div class="darkContentBox1">
+					{% block content1 %}
+					{% endblock %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
